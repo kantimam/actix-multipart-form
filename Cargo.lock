@@ -111,6 +111,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "actix-multipart-basic"
+version = "0.1.0"
+dependencies = [
+ "actix-multipart",
+ "actix-rt",
+ "actix-web",
+ "bytes",
+ "futures",
+ "rusoto_core",
+ "rusoto_s3",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "actix-router"
 version = "0.2.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1190,21 +1205,6 @@ checksum = "396aa0f2003d7df8395cb93e09871561ccc3e785f0acb369170e8cc74ddf9226"
 dependencies = [
  "socket2",
  "winapi 0.3.8",
-]
-
-[[package]]
-name = "multipart-s3"
-version = "0.1.0"
-dependencies = [
- "actix-multipart",
- "actix-rt",
- "actix-web",
- "bytes",
- "futures",
- "rusoto_core",
- "rusoto_s3",
- "serde",
- "serde_json",
 ]
 
 [[package]]
