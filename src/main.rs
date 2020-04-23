@@ -1,18 +1,17 @@
 use actix_multipart::Multipart;
 use actix_web::{middleware, web, App, Error, HttpResponse, HttpServer};
 use std::borrow::BorrowMut;
-use utils::payload_handler::{split_payload};
+use utils::payload_handler::split_payload;
 
 mod utils;
-
 
 async fn handle_form_data(mut payload: Multipart) -> Result<HttpResponse, Error> {
     let (form, files) = split_payload(payload.borrow_mut()).await;
 
     println!("bytes={:#?}", form);
-    
+
     println!("files={:#?}", files);
-    
+
     Ok(HttpResponse::Ok().into())
 }
 
@@ -44,8 +43,10 @@ fn index() -> HttpResponse {
         <body>
             <form target="/" method="post" enctype="multipart/form-data" id="myForm" >
                 <input type="text" name="title" placeholder="give it a name"/>
-                <input type="text" name="description" placeholder="describe it"/>        
-                <input type="number" placeholder="how many" name="count" value=""/>    
+                <input type="text" name="description" placeholder="describe it"/>  
+                <input type="url" name="website" placeholder="website link"/>
+                <input type="url" name="repository" placeholder="repository link"/>       
+                <input type="number" placeholder="set priority" name="priority" value=""/>    
                 <input type="file" multiple name="file"/>
 
                 <input type="submit" value="Submit"></button>
@@ -60,7 +61,6 @@ fn index() -> HttpResponse {
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    
     std::env::set_var("RUST_LOG", "actix_server=info,actix_web=info");
     std::fs::create_dir_all("./files").unwrap();
 
